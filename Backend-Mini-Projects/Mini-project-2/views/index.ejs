@@ -30,7 +30,10 @@
                 <% files.forEach(function(file) { %>
                   <div class="task min-w-72 px-3 py-4 rounded-lg bg-zinc-800">
                      <h1 class="tracking-tighter text-white text-2xl"><%= file%></h1>
-                     <a class="text-blue-500 inline-block mt-2" href="/file/<%= file%>">Read more...</a>
+                     <div class="p-2 w-full flex items-center justify-between mt-3">
+                     <a class="text-blue-500 inline-block" href="/file/<%= file%>">Read more...</a>
+                     <a href="/edit/<%= file%>" class="text-zinc-300 inline-block mt-2">Edit filename</a>
+                     </div>
                    </div>
                 <%})%>
             <%} else {%>
