@@ -1,8 +1,13 @@
 const express = require('express');
 const noteModel = require("./models/note.model")
+const cors = require("cors")
+
+
 const app = express();
 
 app.use(express.json());
+
+app.use(cors())
 
 
 
@@ -32,7 +37,6 @@ app.get("/api/notes", async (req,res)=>{
 
 //Delete /api/notes/:id
 //delete note with the id from req.params
-
 app.delete("/api/notes/:id",async (req,res)=>{
     const id = req.params.id.trim()
     await noteModel.findByIdAndDelete(id)
@@ -44,7 +48,6 @@ app.delete("/api/notes/:id",async (req,res)=>{
 
 //Patch update
 //update the notes description or title
-
 app.patch("/api/notes/:id",async (req,res)=>{
     const id = req.params.id.trim();
     const {description} = req.body;
