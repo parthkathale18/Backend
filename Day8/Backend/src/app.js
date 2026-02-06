@@ -1,6 +1,7 @@
 const express = require('express');
 const noteModel = require("./models/note.model")
 const cors = require("cors")
+const path = require("path")
 
 
 const app = express();
@@ -8,6 +9,8 @@ const app = express();
 app.use(express.json());
 
 app.use(cors())
+
+app.use(express.static(path.join("./public")))
 
 
 
@@ -50,8 +53,9 @@ app.delete("/api/notes/:id",async (req,res)=>{
 //update the notes description or title
 app.patch("/api/notes/:id",async (req,res)=>{
     const id = req.params.id.trim();
-    const {description} = req.body;
+    const {title,description} = req.body;
     await  noteModel.findByIdAndUpdate(id,{
+        title,
         description
     })
 
@@ -60,6 +64,10 @@ app.patch("/api/notes/:id",async (req,res)=>{
         
     })
 
+})
+
+app.use("*name",(req,res)=>{
+    res.sendFile(path.join(__dirname,"..","/public/index.html"))
 })
 
 
